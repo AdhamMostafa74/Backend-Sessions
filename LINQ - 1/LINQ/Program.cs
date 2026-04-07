@@ -118,14 +118,25 @@ namespace LINQ
 
 			//question 11
 
-			var orderedStringArr = new[]{ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+			//var orderedStringArr = new[]{ "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
 
-			var sortedWords =
-				from word in orderedStringArr
-				orderby word.Length, word.ToLower()
-				select word;
+			//var sortedWords =
+			//	from word in orderedStringArr
+			//	orderby word.Length, word.ToLower()
+			//	select word;
 
-			Print(sortedWords);
+			//Print(sortedWords);
+
+			var loyalMembersWithOrdersOver3000 = Source.CustomerList
+				.Where(c => c.Orders.Any(o => o.Total >= 3000)
+							&& c.Orders.Length > 5
+							&& c.Orders.All(o =>
+								   o.OrderDate >= new DateTime(1997, 1, 1))
+				)
+				.Select(c => c.CompanyName);
+				
+			Print(loyalMembersWithOrdersOver3000);
+
 
 
 
